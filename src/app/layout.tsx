@@ -3,6 +3,8 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import Navbar from "@/components/navbar";
 import LandingPage from "@/components/landingpage";
+import HeroSection from "@/components/heropage";
+import Features from "@/components/features";
 const geistSans = Geist({
   variable: "--font-geist-sans",
   subsets: ["latin"],
@@ -22,7 +24,8 @@ export default function RootLayout({
     <html lang="en">
       <body>
         <Navbar />
-        <LandingPage></LandingPage>
+        <HeroSection></HeroSection>
+        <Features></Features>
       </body>
     </html>
   );

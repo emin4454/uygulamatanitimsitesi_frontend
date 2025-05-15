@@ -1,97 +1,76 @@
+/*
+ * Navbar.tsx – light‑theme only, following original HTML layout exactly
+ * ▸ Links always visible and black by default
+ * ▸ Order:  brand | nav‑links | icons
+ * ▸ No dark‑mode, no collapse button
+ */
 "use client";
 
-import { useState } from "react";
-import Link from "next/link";
 import Image from "next/image";
-import { User, Menu } from "lucide-react";
+import Link from "next/link";
+import { User } from "lucide-react";
 
 export default function Navbar() {
-  const [open, setOpen] = useState(false);
-
   return (
-    <nav id="navbar" className="w-full py-4 bg-transparent">
-      <div className="container relative flex flex-wrap items-center justify-between">
-        {/* Logo */}
-        <Link href="/" className="md:me-8 inline-block">
-          {/* Dark / Light logos */}
+    <nav id="navbar" className="w-full py-4 bg-white shadow-sm fixed top-0 z-50">
+      <div className="container relative flex flex-wrap items-center justify-between px-4">
+        {/* Brand */}
+        <Link
+          href="/"
+          className="navbar-brand md:me-8 inline-flex items-center gap-2 shrink-0"
+        >
           <Image
-            src="/assets/images/logo-dark.png"
-            alt="Logo"
-            width={120}
-            height={24}
-            className="h-5 inline-block dark:hidden"
+            src="/assets/image.png"
+            alt="APPEVER Logo"
+            width={60}
+            height={60}
+            className="h-6 w-6"
             priority
           />
-          <Image
-            src="/assets/images/logo-light.png"
-            alt="Logo"
-            width={120}
-            height={24}
-            className="h-5 hidden dark:inline-block"
-            priority
-          />
+          <span className="text-lg font-semibold tracking-wide text-black">
+            APPEVER
+          </span>
         </Link>
 
-        {/* Right‑hand icons */}
-        <div className="flex items-center md:ms-6 order-2 lg_992:order-2">
-          {/* Social / profile */}
-          <ul className="flex gap-2 mb-0">
-            <li>
-              <Link
-                href="#"
-                className="size-8 inline-flex items-center justify-center rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-colors"
-              >
-                <User className="size-4" />
-              </Link>
-            </li>
-            <li>
-              <Link
-                href="#"
-                className="h-8 px-4 text-[12px] tracking-wider inline-flex items-center justify-center font-medium rounded-full bg-red-500 text-white uppercase"
-              >
-                Signup
-              </Link>
-            </li>
-          </ul>
-
-          {/* Mobile collapse button */}
-          <button
-            onClick={() => setOpen(!open)}
-            className="ms-2 inline-flex items-center text-slate-900 dark:text-white lg_992:hidden"
-            aria-controls="menu-collapse"
-            aria-expanded={open}
-          >
-            <span className="sr-only">Navigation Menu</span>
-            <Menu className="size-6" />
-          </button>
-        </div>
-
         {/* Navigation links */}
-        <div
-          id="menu-collapse"
-          className={`w-full ms-auto lg_992:w-auto ${open ? "block" : "hidden"} lg_992:flex lg_992:order-1`}
+        <ul
+          className="navbar-nav flex items-center gap-8 font-medium text-sm md:text-base ms-auto"
+          id="navbar-navlist"
         >
-          <ul className="flex flex-col gap-2 lg_992:flex-row lg_992:gap-0">
-            {[
-              { href: "#home", label: "Home" },
-              { href: "#features", label: "Features" },
-              { href: "#screenshot", label: "Application" },
-              { href: "#faqs", label: "FAQs" },
-              { href: "#download", label: "Download" },
-              { href: "#reviews", label: "Reviews" },
-              { href: "#contact", label: "Contact us" },
-            ].map((item) => (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  className="block py-2 px-4 hover:text-red-500 transition-colors"
-                  onClick={() => setOpen(false)}
-                >
-                  {item.label}
-                </Link>
-              </li>
-            ))}
-          </ul>
+          {[
+            { href: "#home", label: "Home" },
+            { href: "#features", label: "Features" },
+            { href: "#screenshot", label: "Application" },
+            { href: "#faqs", label: "FAQs" },
+            { href: "#download", label: "Download" },
+            { href: "#reviews", label: "Reviews" },
+            { href: "#contact", label: "Contact us" },
+          ].map((item) => (
+            <li key={item.href} className="nav-item list-none">
+              <Link
+                href={item.href}
+                className="nav-link text-black hover:text-red-500 transition-colors"
+              >
+                {item.label}
+              </Link>
+            </li>
+          ))}
+        </ul>
+
+        {/* Icons */}
+        <div className="nav-icons flex items-center md:ms-6 gap-2">
+          <Link
+            href="#"
+            className="size-8 inline-flex items-center justify-center rounded-full bg-red-500/10 text-red-500 hover:bg-red-500 hover:text-white transition-colors"
+          >
+            <User className="size-4" />
+          </Link>
+          <Link
+            href="#"
+            className="h-8 px-4 text-[12px] tracking-wider inline-flex items-center justify-center font-medium rounded-full bg-red-500 text-white uppercase"
+          >
+            Signup
+          </Link>
         </div>
       </div>
     </nav>
